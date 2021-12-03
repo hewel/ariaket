@@ -1,4 +1,5 @@
 import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 import ts from 'rollup-plugin-ts';
 import { terser } from 'rollup-plugin-terser';
 import replace from '@rollup/plugin-replace';
@@ -17,11 +18,12 @@ export default {
   plugins: [
     resolve({
       extensions: ['.js', '.ts'],
+      browser: true,
     }),
     ts({
       transpiler: 'swc',
-      tsconfig: './src/tsconfig.json',
     }),
+    commonjs(),
     !isDev && terser(),
   ],
 };

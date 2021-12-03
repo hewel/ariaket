@@ -1,9 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import ws from '@ariaket/core';
 import logo from './logo.svg';
 import './App.css';
 
 const App = function () {
   const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent<unknown>) => {
+      console.log(event.data);
+    };
+    ws.addEventListener('message', handleMessage);
+    return () => {
+      ws.removeEventListener('message', handleMessage);
+    };
+  }, []);
 
   return (
     <div className="App">
@@ -21,25 +32,21 @@ const App = function () {
           <code>App.tsx</code>
           and save to test HMR updates.
         </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
+        <button
+          type="button"
+          onClick={() => {
+            ws.send(
+              JSON.stringify({
+                jsonrpc: '2.0',
+                id: 1,
+                method: 'aria2.getGlobalStat',
+                params: ['token:4444'],
+              }),
+            );
+          }}
+        >
+          send
+        </button>
       </header>
     </div>
   );

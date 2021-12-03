@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { app } from '@ariaket/core';
-import App from './App';
 
-console.log(app.name);
+import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>

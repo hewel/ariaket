@@ -1,7 +1,34 @@
-console.log('Hello, World!');
+import fastJson from 'fast-json-stringify';
 
-export const app = {
-  name: 'app',
-};
+const ws = new WebSocket('ws://localhost:6800/jsonrpc');
 
-export default { app };
+const stringify = fastJson({
+  title: 'Example Schema',
+  type: 'object',
+  properties: {
+    firstName: {
+      type: 'string',
+    },
+    lastName: {
+      type: 'string',
+    },
+    age: {
+      description: 'Age in years',
+      type: 'integer',
+    },
+    reg: {
+      type: 'string',
+    },
+  },
+});
+
+console.log(
+  stringify({
+    firstName: 'Matteo',
+    lastName: 'Collina',
+    age: 32,
+    reg: /"([^"]|\\")*"/,
+  }),
+);
+
+export default ws;
