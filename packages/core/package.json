@@ -2,7 +2,7 @@
   "name": "@ariaket/core",
   "version": "1.0.0",
   "description": "",
-  "main": "rollup.config.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,5 +19,8 @@
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-ts": "^2.0.4",
     "typescript": "^4.5.2"
+  },
+  "dependencies": {
+    "rambda": "^6.9.0"
   }
 }

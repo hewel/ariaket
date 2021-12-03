@@ -8,8 +8,8 @@ const isDev = process.env.ROLLUP_WATCH === 'true';
 export default {
   input: 'src/index.ts',
   output: {
+    file: 'dist/index.js',
     format: 'esm',
-    file: 'dist/ariaket.js',
   },
   // external,
   context: 'window',
@@ -20,6 +20,7 @@ export default {
     }),
     ts({
       transpiler: 'swc',
+      tsconfig: './src/tsconfig.json',
     }),
     !isDev && terser(),
   ],

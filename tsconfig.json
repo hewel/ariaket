@@ -2,9 +2,13 @@
   "extends": "./tsconfig.build.json",
   "include": ["packages", "types"],
   "compilerOptions": {
+    "baseUrl": ".",
     "module": "commonjs",
     "pretty": true,
     "strictNullChecks": true,
-    "typeRoots": ["./types"]
+    "typeRoots": ["./types"],
+    "paths": {
+      "@ariaket/core": ["packages/core/src"]
+    }
   }
 }
