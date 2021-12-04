@@ -1,22 +1,12 @@
-import fastJson from 'fast-json-stringify';
+import fastJson from './utils/fastJson';
 
 const ws = new WebSocket('ws://localhost:6800/jsonrpc');
 
 const stringify = fastJson({
-  title: 'Example Schema',
+  title: 'obj',
   type: 'object',
   properties: {
-    firstName: {
-      type: 'string',
-    },
-    lastName: {
-      type: 'string',
-    },
-    age: {
-      description: 'Age in years',
-      type: 'integer',
-    },
-    reg: {
+    make: {
       type: 'string',
     },
   },
@@ -24,10 +14,7 @@ const stringify = fastJson({
 
 console.log(
   stringify({
-    firstName: 'Matteo',
-    lastName: 'Collina',
-    age: 32,
-    reg: /"([^"]|\\")*"/,
+    make: 'ford',
   }),
 );
 
