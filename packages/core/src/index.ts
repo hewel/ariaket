@@ -1,20 +1,12 @@
-import fastJson from './utils/fastJson';
+import { stringifyRpc } from './utils/stringify';
 
 const ws = new WebSocket('ws://localhost:6800/jsonrpc');
 
-const stringify = fastJson({
-  title: 'obj',
-  type: 'object',
-  properties: {
-    make: {
-      type: 'string',
-    },
-  },
-});
-
 console.log(
-  stringify({
-    make: 'ford',
+  stringifyRpc({
+    id: 'fgg',
+    method: 'aria2.tellActive',
+    params: ['token:4444'],
   }),
 );
 

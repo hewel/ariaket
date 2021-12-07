@@ -31,4 +31,6 @@ export const stringifyRpc = fastJson({
   },
 });
 
+export type Doc = Parameters<typeof stringifyRpc>[0];
+
 export default stringifyRpc;

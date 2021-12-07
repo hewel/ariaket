@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid';
 import { propEq } from 'rambda';
+import { stringifyRpc, Doc } from './utils/stringify';
 
 type Options = {
   host: string;
@@ -39,15 +40,20 @@ class Socket {
   }
 
   public disconnect() {
-    this.checkConnection();
-    this.ws?.close();
+    Socket.checkConnection(this.ws);
+    this.ws.close();
+  }
+
+  public send(data: Doc) {
+    Socket.checkConnection(this.ws);
+    this.ws.send(stringifyRpc(data));
   }
 
   private listenerList: ListenerItem[] = [];
 
   private addListener<K extends keyof WebSocketEventMap>(type: K, listener: Listener<K>) {
-    this.checkConnection();
-    this.ws?.addEventListener(type, listener);
+    Socket.checkConnection(this.ws);
+    this.ws.addEventListener(type, listener);
     const id = nanoid(4);
 
     this.listenerList.push({
@@ -64,16 +70,16 @@ class Socket {
       throw new Error('listener not found');
     }
 
-    this.checkConnection();
-    this.ws?.removeEventListener(
+    Socket.checkConnection(this.ws);
+    this.ws.removeEventListener(
       this.listenerList[index].type,
       this.listenerList[index].listener as Listener<keyof WebSocketEventMap>,
     );
     this.listenerList.splice(index, 1);
   }
 
-  private checkConnection() {
-    if (this.ws === undefined) {
+  static checkConnection(ws: WebSocket | undefined): asserts ws is WebSocket {
+    if (ws === undefined) {
       throw new Error('Socket is not connected');
     }
   }
