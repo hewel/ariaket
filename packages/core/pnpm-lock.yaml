@@ -7,6 +7,7 @@ specifiers:
   '@swc/core': ^1.2.117
   '@swc/helpers': ^0.2.14
   fast-json-stringify: ^2.7.12
+  nanoid: ^3.1.30
   rambda: ^6.9.0
   rollup: ^2.60.2
   rollup-plugin-terser: ^7.0.2
@@ -15,6 +16,7 @@ specifiers:
 
 dependencies:
   fast-json-stringify: 2.7.12
+  nanoid: 3.1.30
   rambda: 6.9.0
 
 devDependencies:
@@ -595,6 +597,12 @@ packages:
     dependencies:
       brace-expansion: 1.1.11
     dev: true
+
+  /nanoid/3.1.30:
+    resolution: {integrity: sha512-zJpuPDwOv8D2zq2WRoMe1HsfZthVewpel9CAvTfc/2mBD1uUT/agc5f7GHGWXlYkFvi1mVxe4IjvP2HNrop7nQ==}
+    engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
+    hasBin: true
+    dev: false
 
   /node-releases/2.0.1:
     resolution: {integrity: sha512-CqyzN6z7Q6aMeF/ktcMVTzhAHCEpf8SOarwpzpf8pNBY2k5/oM34UHldUwp8VKI7uxct2HxSRdJjBaZeESzcxA==}
