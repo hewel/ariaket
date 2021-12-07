@@ -25,7 +25,9 @@ type TypeCond<S extends Partial<Schema>> = S extends Partial<infer P>
     : P extends Record<'type', 'object'>
     ? TypeObject<P>
     : P extends ArraySchema
-    ? TypeCond<Partial<P['items']>>[]
+    ? P extends { items: infer I }
+      ? TypeCond<Partial<I>>[]
+      : unknown[]
     : P extends TupleSchema
     ? unknown[]
     : unknown
